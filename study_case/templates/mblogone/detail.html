@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}{{article.article_title}}{% endblock %}
+
+{% block content %}
+    <h2>{{article.article_title}}</h2>
+    <p>{{article.article_text}}</p>
+    <em>{{article.date_of_publication}}</em>
+
+    <hr>
+    {% if latest_comments_list  %}
+        {% for c in latest_comments_list %}
+            <p>
+            <strong>{{ c.author_of_comment }}</strong>
+            <p>{{ c.text_of_comment }}</p>
+        {% endfor %}
+    {% endif %}
+
+    <hr>
+
+    <form action="{% url 'mblogone:leave_comment' article.id %}" method="POST">
+        {% csrf_token %}
+        <input type="text" required placeholder="Yours name" name="name"><br>
+        <textarea name="text" required placeholder="Comment" cols="30" rows="10"></textarea><br>
+        <button type="submit">Leave comment</button>
+    </form>
+
+{% endblock %}

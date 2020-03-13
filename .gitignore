@@ -1,0 +1,4 @@
+.idea/
+venv/
+*.log
+study_case/static/grappelli
